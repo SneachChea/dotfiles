@@ -139,11 +139,11 @@ sed \
   -e '/export PATH=\$PATH:\/Users\/.*\/miniconda3/d' \
   -e '/export PATH=\$PATH:\/Users\/.*\/.gem/d' \
   -e '/export PATH="\/Users\/.*\/.rbenv\/bin:\$PATH"/d' \
-  -e '/shaheenacheche\/miniconda3/d' \
+  -e '/\/Users\/.*\/miniconda3/d' \
   "$DOTFILES_DIR/.zshrc" > "$HOME/.zshrc"
 
 info "Done! .zshrc installed at $HOME/.zshrc"
-info ""
+echo
 info "======================================================"
 info " Installation complete!"
 info " Please log out and back in (or run: exec zsh)"

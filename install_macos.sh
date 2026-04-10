@@ -115,12 +115,12 @@ fi
 cp "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
 info "Done! .zshrc installed at $HOME/.zshrc"
 
-info ""
+echo
 info "======================================================"
 info " Installation complete!"
 info " Please log out and back in (or run: exec zsh)"
 info " to start using your new shell configuration."
 info "======================================================"
-info ""
+echo
 warn "NOTE: The .zshrc contains some hardcoded paths (miniconda,"
 warn "      rbenv, pipx) that you may need to update manually."
