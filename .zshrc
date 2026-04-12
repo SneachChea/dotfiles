@@ -1,6 +1,15 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# ====== Homebrew (macOS) ======
+if [[ "$(uname -s)" == "Darwin" ]]; then
+  if [[ -x "/opt/homebrew/bin/brew" ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  elif [[ -x "/usr/local/bin/brew" ]]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+  fi
+fi
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -71,7 +80,12 @@ ZSH_THEME="bira"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 #plugins=(git zsh-autosuggestions zsh-syntax-highlighting zsh-completions)
-export FZF_BASE="/opt/homebrew/opt/fzf"
+# ====== FZF base path ======
+if [[ "$(uname -s)" == "Darwin" ]]; then
+  export FZF_BASE="$(brew --prefix)/opt/fzf"
+else
+  export FZF_BASE="/usr/share/doc/fzf"
+fi
 
 plugins=(git fzf zsh-completions zsh-autosuggestions zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
@@ -105,34 +119,14 @@ source $ZSH/oh-my-zsh.sh
 alias vim="nvim"
 alias reroute_lm_server="ssh -fN -L 1235:localhost:1234 shaheen@192.168.1.77"
 
-export PATH="$PATH:/opt/homebrew/bin/"
-export PATH=$PATH:/Users/shaheenacheche/miniconda3/lib/python3.9/site-packages/
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/shaheenacheche/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/shaheenacheche/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/shaheenacheche/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/shaheenacheche/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
+# ====== PATH ======
+export PATH="$HOME/.local/bin:$PATH"    # pipx binaries
 
 fastfetch
 alias mp-dl="yt-dlp -f bestaudio -x --audio-format mp3 --audio-quality 0 --add-metadata --embed-thumbnail"
 
 
-# Created by `pipx` on 2024-01-12 10:22:43
-export PATH="$PATH:/Users/shaheenacheche/.local/bin"
-
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/shaheenacheche/.cache/lm-studio/bin"
-export PATH=$PATH:/Users/shaheenacheche/.gem/ruby/2.6.0/bin
+# ====== rbenv ======
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
