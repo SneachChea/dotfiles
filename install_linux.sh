@@ -131,16 +131,7 @@ if [ -f "$HOME/.zshrc" ]; then
   cp "$HOME/.zshrc" "$BACKUP"
 fi
 
-# Adapt the macOS-specific paths and settings for Linux
-sed \
-  -e 's|export FZF_BASE="/opt/homebrew/opt/fzf"|export FZF_BASE="/usr/share/doc/fzf"|' \
-  -e '/export PATH="\$PATH:\/opt\/homebrew\/bin\/"/d' \
-  -e '/export PATH="\$PATH:\/Users\/.*\/\.cache\/lm-studio\/bin"/d' \
-  -e '/export PATH=\$PATH:\/Users\/.*\/miniconda3/d' \
-  -e '/export PATH=\$PATH:\/Users\/.*\/.gem/d' \
-  -e '/export PATH="\/Users\/.*\/.rbenv\/bin:\$PATH"/d' \
-  -e '/\/Users\/.*\/miniconda3/d' \
-  "$DOTFILES_DIR/.zshrc" > "$HOME/.zshrc"
+cp "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
 
 info "Done! .zshrc installed at $HOME/.zshrc"
 echo
